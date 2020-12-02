@@ -16,15 +16,7 @@ public class ApplicationConfig {
 
     @Bean
     public BookService bookService() {
-        BookService bookService = new BookService();
-        bookService.setBookRepository(bookRepository()); //setter injection(DI)
-        return bookService;
+        return new BookService();
     }
-//    또는 메서드 파라미터로 주입을 받을 수도 있다
-//    @Bean
-//    public BookService bookService(BookRepository bookRepository) {
-//        BookService bookService = new BookService();
-//        bookService.setBookRepository(bookRepository); //setter injection(DI)
-//        return bookService;
-//    }
+
 }
