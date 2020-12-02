@@ -1,30 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- 아주 고전적인 Spring Bean 설정 방식 -->
-<!-- 단점: 일일히 Bean으로 등록하는 것이 매우 번거롭다 -->
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
 
-    <!-- 1. Bean 정의/등록 -->
-    <!-- 1) id: id의 네이밍 컨벤션은 캐멀(Camel) 케이스를 쓴다 -->
-    <!-- 2) class: 빈의 Type -->
-    <!-- 3) scope: 빈 스코프(유효범위) -->
-    <!-- - singleton: 기본값 (default) -->
-    <!-- - prototype: 매번 새로운 객체를 만들어 사용 -->
-    <!-- - request: HTTP 요청 당 새로운 객체를 만들어 사용 -->
-    <!-- - session: HTTP 세션 당 새로운 객체를 만들어 사용 -->
-    <!-- 4) autowire: 오토와이어 모드 사용 -->
-    <!-- - 기본(default), 타입(byType), 이름(byName), 생성자(constructor), 안함(no)-->
-    <!-- 5) lazy-init: 레이지 초기화(Lazy Initialization) 사용 -->
-
-    <bean id="bookService"
-          class="me.frenchline.springapplicationcontext.BookService">
-        <property name="bookRepository" ref="bookRepository" />
-    </bean>
-    <!-- name: setter에서 가져온다 -->
-    <!-- ref: 레퍼런스로 다른 Bean을 참조한다는 의미, setter에 주입할 수 있는 다른 빈의 id가 와야 한다 -->
-
-    <bean id="bookRepository"
-          class="me.frenchline.springapplicationcontext.BookRepository"/>
+    <context:component-scan base-package="me.frenchline.springapplicationcontext"/>
+    <!-- context의 component-scan 이용한 Spring Bean 등록 방법 -->
+    <!-- 1. base-package: 이 패키지를 포함해 하위 패키지에서 Bean을 스캐닝(애노테이션을 스캐닝)해서 등록 -->
+    <!-- 2. 기본적으로 컴포넌트 애노테이션(@Component)을 사용해서 Bean을 등록할 수 있다 -->
+    <!-- 3. 또한 @Component를 확장받은 애노테이션들을 사용해 Bean으로 등록할 수 있다 -->
+    <!-- Ex) 메타 애노테이션 @Component를 확장받은 컴포지트 애노테이션: @Service, @Repository, @Controller, @Configuration -->
 
 </beans>
